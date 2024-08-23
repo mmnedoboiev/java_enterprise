@@ -29,7 +29,7 @@
 
             <br>
             <br>
-            а,да<a href="logout">Logout</a>
+            <a href="logout">Logout</a>
         </body>
         </html>
     </c:otherwise>
