@@ -21,6 +21,8 @@
                         <th>Author</th>
                         <th>Year</th>
                         <th>Genre</th>
+                        <th>Actions</th>
+                        <th>Edit</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,16 +33,29 @@
                             <td>${book.author}</td>
                             <td>${book.year}</td>
                             <td>${book.genre}</td>
+                            <td>
+                                <!-- Форма видалення для кожної книги -->
+                                <form action="${pageContext.request.contextPath}/delete" method="post">
+                                    <input type="hidden" name="id" value="${book.id}">
+                                    <button type="submit">Delete</button>
+                                </form>
+                            </td>
+                                    <td>
+                                        <!-- Кнопка для редагування -->
+                                        <a href="${pageContext.request.contextPath}/edit?id=${book.id}">Edit</a>
+                                    </td>
                         </tr>
                     </c:forEach>
                 </tbody>
             </table>
-            <a href="${pageContext.request.contextPath}/addbook">AddBook</a>
 
-            <form action="${pageContext.request.contextPath}/delete" method="post">
-                <input name="id" type="hidden" value="${book.id}">
-                <button type="submit">Delete</button>
-            </form>
+            <br><br>
+            <a href="${pageContext.request.contextPath}/addbook">Add Book</a>
+
+
+            <br>
+            <br>
+            <a href="logout">Logout</a>
         </body>
         </html>
     </c:otherwise>

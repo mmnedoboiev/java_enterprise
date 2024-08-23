@@ -20,7 +20,7 @@ public class LoginServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         if (session != null && session.getAttribute("user") != null) {
             // Якщо сесія існує і користувач уже авторизований, перенаправляємо на сторінку привітання
-            response.sendRedirect("welcome.jsp");
+            response.sendRedirect("select.jsp");
         } else {
             // Перенаправляємо на сторінку входу
             request.getRequestDispatcher("/login.jsp").forward(request, response);
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                         HttpSession session = request.getSession(true); // створює нову сесію, якщо вона не існує
                         session.setAttribute("user", login);
                         session.setAttribute("userId", userId); // Зберігаємо userId в сесії
-                        response.sendRedirect("welcome.jsp");
+                        response.sendRedirect("select");
                     } else {
                         // Невірний логін або пароль
                         response.sendRedirect("login.jsp?error=1");

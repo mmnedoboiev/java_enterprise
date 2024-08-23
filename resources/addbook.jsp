@@ -26,6 +26,10 @@
             </form>
 
             <a href="${pageContext.request.contextPath}/select">Select</a>
+
+            <br>
+            <br>
+            а,да<a href="logout">Logout</a>
         </body>
         </html>
     </c:otherwise>

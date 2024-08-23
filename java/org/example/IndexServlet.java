@@ -31,6 +31,6 @@ public class IndexServlet extends HttpServlet {
 
         // Передача результату перевірки на JSP-сторінку
         request.setAttribute("connectionStatus", connectionStatus);
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+        request.getRequestDispatcher("index").forward(request, response);
     }
 }

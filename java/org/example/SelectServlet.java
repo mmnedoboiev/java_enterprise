@@ -24,14 +24,14 @@ public class SelectServlet extends HttpServlet {
         // Отримуємо сесію та перевіряємо наявність користувача
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login");
             return;
         }
 
         Integer userId = (Integer) session.getAttribute("userId"); // Отримуємо ID користувача з сесії
 
         if (userId == null) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("login");
             return;
         }
 
