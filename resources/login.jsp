@@ -2,11 +2,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <%-- Перевіряємо, чи існує активна сесія та чи є в ній атрибут "user" --%>
-<c:choose>
-    <c:when test="${sessionScope.user != null}">
+<c:choose><!-- Використовуємо JSTL тег для умовної логіки -->
+    <c:when test="${sessionScope.user != null}"><!-- Якщо користувач не авторизований, перенаправляємо на сторінку входу -->
         <c:redirect url="welcome.jsp" />
     </c:when>
-    <c:otherwise>
+    <c:otherwise><!-- В іншому випадку, якщо користувач авторизований -->
         <html>
         <head>
             <title>Login</title>

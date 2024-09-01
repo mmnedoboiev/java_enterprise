@@ -1,11 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="org.example.Book" %>
-<c:choose>
+<c:choose><!-- Використовуємо JSTL тег для умовної логіки -->
     <c:when test="${sessionScope.user == null}">
-        <c:redirect url="login.jsp" />
+        <c:redirect url="login.jsp" /><!-- Якщо користувач не авторизований, перенаправляємо на сторінку входу -->
     </c:when>
-    <c:otherwise>
+    <c:otherwise><!-- В іншому випадку, якщо користувач авторизований -->
         <html>
         <head>
             <title>Edit Book</title>

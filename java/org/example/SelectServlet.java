@@ -16,53 +16,53 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet("/select")
 public class SelectServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<Book> books = new ArrayList<>();
+        List<Book> books = new ArrayList<>(); // Створюємо список для збереження об'єктів книг.
 
         // Отримуємо сесію та перевіряємо наявність користувача
-        HttpSession session = request.getSession(false);
+        HttpSession session = request.getSession(false); // Отримуємо існуючу сесію, не створюючи нову.
         if (session == null || session.getAttribute("user") == null) {
-            response.sendRedirect("login");
+            response.sendRedirect("login"); // Якщо користувач не авторизований, перенаправляємо на сторінку входу.
             return;
         }
 
-        Integer userId = (Integer) session.getAttribute("userId"); // Отримуємо ID користувача з сесії
+        Integer userId = (Integer) session.getAttribute("userId"); // Отримуємо ID користувача з сесії.
 
         if (userId == null) {
-            response.sendRedirect("login");
+            response.sendRedirect("login"); // Якщо ID користувача відсутній, перенаправляємо на сторінку входу.
             return;
         }
 
         try (Connection connection = DatabaseConnection.getConnection()) {
-            // Фільтруємо книги за ID користувача
             String sql = "SELECT id, name, author, year, genre FROM books WHERE userid = ?";
             try (PreparedStatement stmt = connection.prepareStatement(sql)) {
                 stmt.setInt(1, userId);
                 try (ResultSet rs = stmt.executeQuery()) {
                     while (rs.next()) {
-                        int id = rs.getInt("id");
-                        String name = rs.getString("name");
-                        String author = rs.getString("author");
-                        String year = rs.getString("year");
-                        String genre = rs.getString("genre");
+                        int id = rs.getInt("id"); // Отримуємо ID книги.
+                        String name = rs.getString("name"); // Отримуємо назву книги.
+                        String author = rs.getString("author"); // Отримуємо автора книги.
+                        String year = rs.getString("year"); // Отримуємо рік видання книги.
+                        String genre = rs.getString("genre"); // Отримуємо жанр книги.
 
-                        Book book = new Book();
-                        book.setId(id);
-                        book.setName(name);
-                        book.setAuthor(author);
-                        book.setYear(year);
-                        book.setGenre(genre);
-                        books.add(book);
+                        Book book = new Book(); // Створюємо новий об'єкт книги.
+                        book.setId(id); // Встановлюємо ID книги.
+                        book.setName(name); // Встановлюємо назву книги.
+                        book.setAuthor(author); // Встановлюємо автора книги.
+                        book.setYear(year); // Встановлюємо рік видання книги.
+                        book.setGenre(genre); // Встановлюємо жанр книги.
+                        books.add(book); // Додаємо книгу до списку книг.
                     }
                 }
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace(); // Виводимо інформацію про помилку у разі виникнення виключення SQL.
         }
 
-        request.setAttribute("books", books);
-        request.getRequestDispatcher("/select.jsp").forward(request, response);
+        request.setAttribute("books", books); // Встановлюємо атрибут для списку книг, щоб передати його на JSP-сторінку.
+        request.getRequestDispatcher("/select.jsp").forward(request, response); // Перенаправляємо запит на JSP-сторінку для відображення книг.
     }
 }

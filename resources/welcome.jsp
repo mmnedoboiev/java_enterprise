@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<c:choose>
+<c:choose><!-- Використовуємо JSTL тег для умовної логіки -->
     <c:when test="${sessionScope.user == null}">
         <c:redirect url="login.jsp" />
     </c:when>
